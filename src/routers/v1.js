@@ -5,9 +5,23 @@ const router = express();
 
 router.get('/:id', (req, res) => {
     try {
-        Url.find({ shortId: req.params.id }, (err, urls) => {
+        Url.find({ shortId: req.params.id }, async (err, urls) => {
             if (err) throw err;
-            res.json(urls[0])
+            const url = await urls[0];
+            url.clicks +=1;
+            url.save(); 
+            res.redirect(url.originalUrl);
+        })
+    } catch {
+        res.json({ status: 'FAILED' });
+    }
+})
+
+router.get('/stats/:id', (req, res) => {
+    try {
+        Url.find({ shortId: req.params.id }, async (err, urls) => {
+            if (err) throw err;
+            res.json(urls[0]);
         })
     } catch {
         res.json({ status: 'FAILED' });
@@ -19,7 +33,7 @@ router.post('/', async (req, res) => {
         Url.create(req.body, async (err, url) => {
             if (err) throw err;
             url.shortId = await shortId(url._id);
-            url.save();
+            await url.save();
             res.json({ status: 'SUCCESS', url });
         })
     } catch {
