@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express();
 
-router.get('/status', (req,res) => {
-    console.send('good')
+router.post('/short', async (req, res) => {
+
 })
 
 module.exports = router;
