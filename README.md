@@ -1,2 +1,2 @@
 # shorten-url
-Application to short and monitoring urls
+Application form making urls short and monitored
