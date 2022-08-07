@@ -15,10 +15,6 @@ const urlSchema = mongoose.Schema({
     },
     label: {
         type: String
-    },
-    expiration: {
-        type: Number,
-        default: 5 // 5 mins
     }
 });
 
