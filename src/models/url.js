@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const urlSchema = mongoose.Schema({
+    shortId: {
+        type: String
+    },
     originalUrl: {
         type: String,
         require: true
@@ -11,8 +14,11 @@ const urlSchema = mongoose.Schema({
     },
     label: {
         type: String
+    },
+    expiration: {
+        type: Number,
+        default: 5 // 5 mins
     }
-
 }, { timestamps: true });
 
 const Url = mongoose.model('Url', urlSchema);
