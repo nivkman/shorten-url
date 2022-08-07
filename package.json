@@ -2,9 +2,10 @@
   "name": "shorten-url",
   "version": "1.0.0",
   "description": "Application for making urls short and monitored",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
