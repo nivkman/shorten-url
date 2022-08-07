@@ -15,7 +15,7 @@ const urlSchema = mongoose.Schema({
     },
     label: {
         type: String
-    }
+    },
 });
 
 
