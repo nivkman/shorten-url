@@ -1,5 +1,5 @@
 # shorten-url
-Application for making urls short and monitored
+Node js application for making urls short and monitored
 
 ## Installation
 Install with npm.
