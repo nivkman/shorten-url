@@ -9,7 +9,7 @@ app.use(cors());
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(process.env.DATABASEURL, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }, (err) => {
+mongoose.connect(process.env.DATABASEURL, { useUnifiedTopology: true, useNewUrlParser: true }, (err) => {
     if (err) {
         console.log(err);
     } else {
@@ -26,5 +26,5 @@ app.use(bodyParser.json());
 app.use('/api/v1', require('./routers/v1.js'));
 
 app.listen(process.env.PORT, () => {
-    console.log(`(${process.env.SERVICE}) running at PORT: ${process.env.PORT}`);
+    console.log(`(backend) running at PORT: ${process.env.PORT}`);
 })
