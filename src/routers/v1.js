@@ -4,15 +4,22 @@ const Url = require('../models/url');
 const router = express();
 
 router.get('/:id', (req, res) => {
-    const id = "507f191e810c19729de860ea"
-    const d = shortId(id)
-    console.log(d)
+    try {
+        Url.find({ shortId: req.params.id }, (err, urls) => {
+            if (err) throw err;
+            res.json(urls[0])
+        })
+    } catch {
+        res.json({ status: 'FAILED' });
+    }
 })
 
-router.post('/short', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-        Url.create(req.body, (err, url) => {
+        Url.create(req.body, async (err, url) => {
             if (err) throw err;
+            url.shortId = await shortId(url._id);
+            url.save();
             res.json({ status: 'SUCCESS', url });
         })
     } catch {
