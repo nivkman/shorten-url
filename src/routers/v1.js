@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
         Url.create({ originalUrl: req.body.originalUrl }, async (err, url) => {
             if (err) throw err;
             url.shortId = shortId(url._id);
-            url.expireAt =  new Date(url.createdAt.getTime() + 600*1000);
+            url.expireAt = new Date(url.createdAt.getTime() + req.body.expires * 60000);
             await url.save();
             res.json({ status: 'SUCCESS', url });
         })
