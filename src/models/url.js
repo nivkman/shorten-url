@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const urlSchema = mongoose.Schema({
-    createdAt: { type: Date, default: Date.now, expires: 600 },
+    expireAt: { type: Date, default: null },
     shortId: {
         type: String
     },
@@ -16,8 +16,9 @@ const urlSchema = mongoose.Schema({
     label: {
         type: String
     },
-});
+}, { timestamps: true });
 
+urlSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
 
 const Url = mongoose.model('Url', urlSchema);
 module.exports = Url;

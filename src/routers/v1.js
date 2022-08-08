@@ -38,8 +38,8 @@ router.post('/', async (req, res) => {
     try {
         Url.create({ originalUrl: req.body.originalUrl }, async (err, url) => {
             if (err) throw err;
-            url.shortId = await shortId(url._id);
-            url.createdAt.expires = req.body.expires * 60 || 600;
+            url.shortId = shortId(url._id);
+            url.expireAt =  new Date(url.createdAt.getTime() + 600*1000);
             await url.save();
             res.json({ status: 'SUCCESS', url });
         })
