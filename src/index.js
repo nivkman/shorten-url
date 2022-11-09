@@ -27,7 +27,7 @@ app.use('/api/v1', require('./routers/v1.js'));
 
 app.get('/:id', (req, res) => res.redirect(`/api/v1/${req.params.id}`));
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 9000;
 
 app.listen(PORT, () => {
     console.log(`(backend) running at PORT: ${PORT}`);
