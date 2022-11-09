@@ -1,6 +1,7 @@
 const express = require('express');
 const shortId = require('short-mongo-id');
 const Url = require('../models/url');
+const { auth } = require('../middaleware/auth');
 const router = express();
 
 const expUrlNotFound = (res) => {
@@ -22,7 +23,7 @@ router.get('/:id', (req, res) => {
     }
 })
 
-router.get('/stats/:id', (req, res) => {
+router.get('/stats/:id', auth, (req, res) => {
     try {
         Url.find({ shortId: req.params.id }, async (err, urls) => {
             if (err) throw err;
@@ -34,7 +35,7 @@ router.get('/stats/:id', (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     try {
         Url.create({ originalUrl: req.body.originalUrl }, async (err, url) => {
             if (err) throw err;
